@@ -1,17 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Flashcard;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class FlashcardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $flashcards = Flashcard::where('nextReviewDate', '<=', Carbon::now())
+        $flashcards = Flashcard::where('user_id', Auth::id())
+                               ->where('nextReviewDate', '<=', Carbon::now())
                                ->where('mastered', false)
                                ->get();
         return view('flashcards.index', compact('flashcards'));
@@ -46,55 +52,33 @@ class FlashcardController extends Controller
         return redirect('/');
     }
 
-    /*public function seedFromJson()
+    public function seedFromJson()
     {
-
         $path = database_path('seeders/flashcards.json');
         if (!File::exists($path)) {
-            return response()->json(['error' => 'File does not exist at path: ' . $path], 404);
+            throw new \Exception('File does not exist at path: ' . $path);
         }
 
-    $json = File::get($path);
-    $flashcards = json_decode($json, true);
+        $json = File::get($path);
+        $flashcards = json_decode($json, true);
 
-        foreach ($flashcards as &$flashcard) {
-            $flashcard['nextReviewDate'] = Carbon::now();
-        }
-
-        Flashcard::insert($flashcards);
-
-        return redirect('/');
-    }*/
-
-    public function seedFromJson()
-        {
-            $path = database_path('seeders/flashcards.json');
-            if (!File::exists($path)) {
-                throw new \Exception('File does not exist at path: ' . $path);
-            }
-
-            $json = File::get($path);
-            $flashcards = json_decode($json, true);
-
-            foreach ($flashcards as $flashcardData) {
-                $exists = Flashcard::where('word', $flashcardData['word'])
+        foreach ($flashcards as $flashcardData) {
+            $exists = Flashcard::where('user_id', Auth::id())
+                                ->where('word', $flashcardData['word'])
                                 ->where('meaning', $flashcardData['meaning'])
                                 ->exists();
 
-                if (!$exists) {
-                    $flashcard = new Flashcard();
-                    $flashcard->word = $flashcardData['word'];
-                    $flashcard->meaning = $flashcardData['meaning'];
-                    $flashcard->pronunciation = $flashcardData['pronunciation'];
-                    $flashcard->nextReviewDate = Carbon::now();
-                    $flashcard->save();
-                }
+            if (!$exists) {
+                $flashcard = new Flashcard();
+                $flashcard->user_id = Auth::id();
+                $flashcard->word = $flashcardData['word'];
+                $flashcard->meaning = $flashcardData['meaning'];
+                $flashcard->pronunciation = $flashcardData['pronunciation'];
+                $flashcard->nextReviewDate = Carbon::now();
+                $flashcard->save();
             }
-
-            return redirect('/');
         }
 
-
-
-
+        return redirect('/');
+    }
 }

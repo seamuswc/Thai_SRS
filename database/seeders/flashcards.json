@@ -503,9 +503,17 @@
     {"word": "เวลา", "meaning": "When", "pronunciation": "weila"},
 
     {"word": "คล้ายกัน", "meaning": "Similar", "pronunciation": "khlai gan"},
-    {"word": "เหมือนกัน", "meaning": "Same", "pronunciation": "muean gan"}
+    {"word": "เหมือนกัน", "meaning": "Same", "pronunciation": "muean gan"},
 
-
-
-  ]
-  
+    {"word": "ตี", "meaning": "hit", "pronunciation": "dtee"},
+    {"word": "ตบ", "meaning": "slap", "pronunciation": "tob"},
+    {"word": "มีเส้นเลือดมาก", "meaning": "veiny", "pronunciation": "mee sen luead mak"},
+    {"word": "กลับ", "meaning": "return", "pronunciation": "glap"},
+    {"word": "ให้ยืม", "meaning": "lend", "pronunciation": "hai yuum"},
+    {"word": "เงินกู้", "meaning": "loan", "pronunciation": "ngern goo"},
+    {"word": "ยืม", "meaning": "borrow", "pronunciation": "yuum"},
+    {"word": "ถ่ายรูป", "meaning": "take photo", "pronunciation": "thaai roop"},
+    {"word": "แสดงให้ผมดู", "meaning": "show me", "pronunciation": "sa-daeng hai phom du"},
+    {"word": "แสดง", "meaning": "show", "pronunciation": "sa-daeng"},
+    {"word": "สำหรับ", "meaning": "for", "pronunciation": "sam-rap"}
+]

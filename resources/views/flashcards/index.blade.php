@@ -11,6 +11,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f9;
+            position: relative;
         }
         .container {
             width: 300px;
@@ -24,7 +25,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             font-size: 32px;
-
         }
         .hidden {
             display: none;
@@ -44,34 +44,50 @@
         button:hover {
             background-color: #0056b3;
         }
+        .logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Review Words</h1>
-        <p id="progress">0 / 0</p>
-        @foreach ($flashcards as $flashcard)
-            <div class="flashcard hidden" data-id="{{ $flashcard->id }}">
-                <p class="word">{{ $flashcard->word }}</p>
-                <p class="meaning hidden">{{ $flashcard->meaning }}</p>
-                <p class="pronunciation hidden">{{ $flashcard->pronunciation }}</p>
-                <div class="actions hidden">
-                    <form action="/review" method="POST" class="know-form">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $flashcard->id }}">
-                        <input type="hidden" name="known" value="1">
-                        <button type="submit">I know</button>
-                    </form>
-                    <form action="/review" method="POST" class="dont-know-form">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $flashcard->id }}">
-                        <input type="hidden" name="known" value="0">
-                        <button type="submit">I don't know</button>
-                    </form>
+
+    @auth
+        <div class="logout">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1>Review Words</h1>
+            <p id="progress">0 / 0</p>
+            @foreach ($flashcards as $flashcard)
+                <div class="flashcard hidden" data-id="{{ $flashcard->id }}">
+                    <p class="word">{{ $flashcard->word }}</p>
+                    <p class="meaning hidden">{{ $flashcard->meaning }}</p>
+                    <p class="pronunciation hidden">{{ $flashcard->pronunciation }}</p>
+                    <div class="actions hidden">
+                        <form action="/review" method="POST" class="know-form">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $flashcard->id }}">
+                            <input type="hidden" name="known" value="1">
+                            <button type="submit">I know</button>
+                        </form>
+                        <form action="/review" method="POST" class="dont-know-form">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $flashcard->id }}">
+                            <input type="hidden" name="known" value="0">
+                            <button type="submit">I don't know</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @else
+        <p>Please <a href="{{ route('login') }}">login</a> or <a href="{{ route('register') }}">register</a> to start using the SRS app.</p>
+    @endauth
 
     <script>
         let currentCardIndex = 0;
