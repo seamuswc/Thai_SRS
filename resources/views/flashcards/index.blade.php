@@ -23,6 +23,8 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            font-size: 32px;
+
         }
         .hidden {
             display: none;
@@ -133,7 +135,6 @@
                     case 'a':
                     case 's':
                     case 'd':
-                    case 'ArrowLeft':
                         if (isFlipped) {
                             handleFormSubmit(currentCard.querySelector('.dont-know-form'));
                         }
@@ -144,7 +145,7 @@
                     case '\\':
                     case ']':
                     case '[':
-                    case 'ArrowRight':
+                    case '\'':
                         if (isFlipped) {
                             handleFormSubmit(currentCard.querySelector('.know-form'));
                         }

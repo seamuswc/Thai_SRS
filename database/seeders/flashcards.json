@@ -52,6 +52,7 @@
     {"word":"เข้า","meaning":"Enter","pronunciation":"khao"},
     {"word":"ใส่","meaning":"Put into/Wear","pronunciation":"sai"},
     {"word":"วาง","meaning":"Put","pronunciation":"wang"},
+
     {"word":"ใหญ่","meaning":"Big","pronunciation":"yai"},
     {"word":"เล็ก","meaning":"Small","pronunciation":"lek"},
     {"word":"ยาว","meaning":"Long","pronunciation":"yao"},
@@ -121,6 +122,7 @@
     {"word":"เงียบ","meaning":"Quiet","pronunciation":"ngiap"},
     {"word":"ปลอดภัย","meaning":"Safe","pronunciation":"plot-phai"},
     {"word":"อันตราย","meaning":"Dangerous","pronunciation":"an-ta-rai"},
+
     {"word":"บ้าน","meaning":"House","pronunciation":"baan"},
     {"word":"โรงเรียน","meaning":"School","pronunciation":"rong-rian"},
     {"word":"ห้อง","meaning":"Room","pronunciation":"hong"},
@@ -265,6 +267,7 @@
     {"word":"เต้านม","meaning":"Breast","pronunciation":"tao-nom"},
     {"word":"ก้น","meaning":"Buttocks","pronunciation":"gon"},
     {"word":"สะดือ","meaning":"Navel","pronunciation":"sa-deu"},
+
     {"word":"ดูด","meaning":"Suck","pronunciation":"dood"},
     {"word":"หลั่ง","meaning":"Ejaculate","pronunciation":"lang"},
     {"word":"แตก","meaning":"Cum","pronunciation":"taek"},
@@ -307,15 +310,8 @@
     {"word":"หำใหญ่","meaning":"Big dick","pronunciation":"ham-yai"},
     {"word":"หำเล็ก","meaning":"Small dick","pronunciation":"ham-lek"},
     {"word":"โสเภณี","meaning":"Prostitute","pronunciation":"so-pe-nee"},
-    {"word":"หญิงขายบริการ","meaning":"Female sex worker","pronunciation":"ying-khai-bor-ri-gan"},
-    {"word":"ชายขายบริการ","meaning":"Male sex worker","pronunciation":"chai-khai-bor-ri-gan"},
-    {"word":"การค้าประเวณี","meaning":"Prostitution","pronunciation":"gaan-kha-pra-we-ni"},
+
     {"word":"หากิน","meaning":"Solicit sex (informal)","pronunciation":"ha-gin"},
-    {"word":"อาบอบนวด","meaning":"Massage parlor","pronunciation":"aap-ob-nuat"},
-    {"word":"ไซด์ไลน์","meaning":"Escort","pronunciation":"side-line"},
-    {"word":"แม่เล้า","meaning":"Madam (pimp for females)","pronunciation":"mae-lao"},
-    {"word":"แมงดา","meaning":"Pimp","pronunciation":"maeng-da"},
-    {"word":"ผู้ชายขายตัว","meaning":"Male prostitute","pronunciation":"phu-chai-khai-tua"},
     {"word":"เด็กนั่งดริ้งค์","meaning":"Bar girl","pronunciation":"dek-nang-drink"},
     {"word":"ซ่อง","meaning":"Brothel","pronunciation":"song"},
     {"word":"กระหรี่","meaning":"Whore","pronunciation":"kra-ree"},
@@ -328,9 +324,9 @@
     {"word":"ชักว่าว","meaning":"Masturbate","pronunciation":"chak-wao"},
     {"word":"การแข็งตัว","meaning":"Erection","pronunciation":"gaan khaeng tua"},
     {"word":"น้ำแตก","meaning":"Orgasm","pronunciation":"nam taek"},
+
     {"word":"ข้าว","meaning":"Rice","pronunciation":"khao"},
     {"word":"ก๋วยเตี๋ยว","meaning":"Noodles","pronunciation":"kuai-tiao"},
-    {"word":"ผัดไทย","meaning":"Pad Thai","pronunciation":"pad-thai"},
     {"word":"แกงเขียวหวาน","meaning":"Green Curry","pronunciation":"gaeng-khiao-waan"},
     {"word":"แกงแดง","meaning":"Red Curry","pronunciation":"gaeng-daeng"},
     {"word":"ต้มยำกุ้ง","meaning":"Tom Yum Goong","pronunciation":"tom-yam-goong"},
@@ -475,7 +471,41 @@
     {"word":"คาว","meaning":"Fishy","pronunciation":"khao"},
     {"word":"มัน","meaning":"Greasy","pronunciation":"man"},
     {"word":"สับสน","meaning":"Confused","pronunciation":"saps-on"},
-    {"word":"เหนียว","meaning":"Sticky","pronunciation":"niew"}
-  
+    {"word":"เหนียว","meaning":"Sticky","pronunciation":"niew"},
+    
+    {"word": "กู", "meaning": "I (rude/intimate)", "pronunciation": "gu"},
+    {"word": "มึง", "meaning": "You (rude/intimate)", "pronunciation": "meung"},
+    {"word": "พวกมัน", "meaning": "Them/Their (rude/intimate)", "pronunciation": "phuak man"},
+    {"word": "เธอ", "meaning": "You (informal, singular)", "pronunciation": "thoe"},
+    {"word": "เรา", "meaning": "We", "pronunciation": "rao"},
+    {"word": "พวกเรา", "meaning": "Us", "pronunciation": "phuak rao"},
+    {"word": "มัน", "meaning": "It (rude/intimate)", "pronunciation": "man"},
+    {"word": "เขา", "meaning": "He/She/They (singular)", "pronunciation": "khao"},
+    {"word": "พวกเขา", "meaning": "They (plural)", "pronunciation": "phuak khao"},
+    {"word": "ผม", "meaning": "I (male, formal)", "pronunciation": "phom"},
+    {"word": "ฉัน", "meaning": "I (female, formal)", "pronunciation": "chan"},
+    {"word": "คุณ", "meaning": "You (formal)", "pronunciation": "khun"},
+    {"word": "ของ", "meaning": "My/Mine (e.g., นี่คือของผม - This is mine - ni ke kong phom)", "pronunciation": "khong"},
+
+    {"word": "อร่อย", "meaning": "Delicious", "pronunciation": "aroi"},
+    {"word": "หรือยัง", "meaning": "Yet?", "pronunciation": "rue yang", "usage": "Used to ask if an action has been completed. Structure: [Verb/Action] + หรือยัง (rue yang)"},
+    {"word": "ยังไง", "meaning": "How?", "pronunciation": "yang ngai", "usage": "Used to ask about the manner or method. Example: คุณทำยังไง (khun tham yang ngai) - How do you do this?"},
+    {"word": "เพราะอะไร", "meaning": "Why?", "pronunciation": "phro arai", "usage": "Used to ask about the reason or motive. Example: ทำไมคุณถึงมาสายเพราะอะไร (thammai khun theung ma sai phro arai) - Why are you late?"},
+    {"word": "เมื่อไหร่", "meaning": "When?", "pronunciation": "muea rai", "usage": "Used to ask about the time or occasion. Example: คุณจะมาเมื่อไหร่ (khun ja ma muea rai) - When are you coming?"},
+    {"word": "ที่ไหน", "meaning": "Where?", "pronunciation": "thi nai", "usage": "Used to ask about the place. Example: คุณอยู่ที่ไหน (khun yu thi nai) - Where are you?"},
+    {"word": "อะไร", "meaning": "What?", "pronunciation": "arai", "usage": "Used to ask about things or subjects. Example: นี่คืออะไร (ni khue arai) - What is this?"},
+    {"word": "อย่างไร", "meaning": "How?", "pronunciation": "yang rai", "usage": "Similar to 'ยังไง' (yang ngai), but more formal. Example: คุณทำอย่างไร (khun tham yang rai) - How do you do this?"},
+    {"word": "ทำไม", "meaning": "Why?", "pronunciation": "thammai", "usage": "Used to ask about the reason or motive. Example: ทำไมคุณถึงมาสาย (thammai khun theung ma sai) - Why are you late?"},
+    {"word": "เพราะว่า", "meaning": "Because", "pronunciation": "phro wa", "usage": "Used to give a reason or motive. Example: ฉันมาสายเพราะว่ารถติด (chan ma sai phro wa rot tit) - I am late because there was traffic."},
+    {"word": "เมื่อ", "meaning": "When", "pronunciation": "muea", "usage": "Used to indicate time in an affirmative sentence. Example: ฉันจะไปเมื่อคุณพร้อม (chan ja pai muea khun phrom) - I will go when you are ready."},
+    {"word": "เพราะ", "meaning": "Because", "pronunciation": "phro", "usage": "Used to give a reason or motive, similar to 'เพราะว่า'. Example: ฉันมาสายเพราะรถติด (chan ma sai phro rot tit) - I am late because there was traffic."},
+    {"word": "ใคร", "meaning": "Who?", "pronunciation": "khrai", "usage": "Used to ask about people. Example: เขาเป็นใคร (khao pen khrai) - Who is he?"},
+    {"word": "เวลา", "meaning": "When", "pronunciation": "weila"},
+
+    {"word": "คล้ายกัน", "meaning": "Similar", "pronunciation": "khlai gan"},
+    {"word": "เหมือนกัน", "meaning": "Same", "pronunciation": "muean gan"}
+
+
+
   ]
   
