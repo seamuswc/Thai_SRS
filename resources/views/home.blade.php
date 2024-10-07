@@ -8,14 +8,14 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                    <li class="nav-item">
+                        <a href="{{ route('flash', ['language' => 'thai']) }}">Thai Flashcards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('flash', ['language' => 'chinese']) }}">Chinese Flashcards</a>
+                    </li>
                 </div>
+
             </div>
         </div>
     </div>

@@ -72,12 +72,14 @@
                         <form action="/review" method="POST" class="know-form">
                             @csrf
                             <input type="hidden" name="id" value="{{ $flashcard->id }}">
+                            <input type="hidden" name="language" value="{{ $language }}">
                             <input type="hidden" name="known" value="1">
                             <button type="submit">I know</button>
                         </form>
                         <form action="/review" method="POST" class="dont-know-form">
                             @csrf
                             <input type="hidden" name="id" value="{{ $flashcard->id }}">
+                            <input type="hidden" name="language" value="{{ $language }}">
                             <input type="hidden" name="known" value="0">
                             <button type="submit">I don't know</button>
                         </form>

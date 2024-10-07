@@ -12,6 +12,7 @@ def find_duplicates(array)
     end
   end
 
+=begin 
   # Ensure all items with the same word are moved to duplicates
   unique_items.each do |unique_item|
     if duplicates.any? { |i| i['word'] == unique_item['word'] }
@@ -20,12 +21,13 @@ def find_duplicates(array)
   end
 
   unique_items.reject! { |item| duplicates.any? { |i| i['word'] == item['word'] } }
+=end
 
   { unique_items: unique_items, duplicates: duplicates }
 end
 
 # Read and parse the JSON file
-file = File.read('flashcards.json')
+file = File.read('seeds/chinese.json')
 data = JSON.parse(file)
 
 # Find duplicates

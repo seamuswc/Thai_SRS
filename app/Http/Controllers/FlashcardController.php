@@ -6,6 +6,8 @@ use App\Models\Flashcard;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
+
 
 class FlashcardController extends Controller
 {
@@ -14,18 +16,29 @@ class FlashcardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($language)
     {
-        $flashcards = Flashcard::where('user_id', Auth::id())
+
+        $flashcard = new Flashcard();
+
+        $flashcard->setTable($language);  
+
+
+        $flashcards = $flashcard->where('user_id', Auth::id())
                                ->where('nextReviewDate', '<=', Carbon::now())
                                ->where('mastered', false)
                                ->get();
-        return view('flashcards.index', compact('flashcards'));
+        return view('flashcards.index', compact('flashcards', 'language'));
     }
 
     public function review(Request $request)
     {
-        $flashcard = Flashcard::find($request->id);
+
+        $flashcard = new Flashcard();
+        $flashcard->setTable($request->language);  // Dynamically set the table from the request
+        
+        $flashcard = $flashcard->where('id', $request->id)->first();
+
         $known = $request->known;
 
         if ($known) {
@@ -49,36 +62,55 @@ class FlashcardController extends Controller
         $flashcard->nextReviewDate = Carbon::now()->addDays($flashcard->interval);
         $flashcard->save();
 
-        return redirect('/');
+        return redirect("/flash/$request->language");
+
     }
+
 
     public function seedFromJson()
     {
-        $path = database_path('seeders/flashcards.json');
-        if (!File::exists($path)) {
-            throw new \Exception('File does not exist at path: ' . $path);
-        }
+        $directory = database_path('seeders/seeds');
+        $files = File::allFiles($directory);
 
-        $json = File::get($path);
-        $flashcards = json_decode($json, true);
+        foreach($files as $file) {
 
-        foreach ($flashcards as $flashcardData) {
-            $exists = Flashcard::where('user_id', Auth::id())
-                                ->where('word', $flashcardData['word'])
-                                ->where('meaning', $flashcardData['meaning'])
-                                ->exists();
+            $fileName = pathinfo($file, PATHINFO_FILENAME);
+            $filePath = $file->getRealPath();
+            
 
-            if (!$exists) {
-                $flashcard = new Flashcard();
-                $flashcard->user_id = Auth::id();
-                $flashcard->word = $flashcardData['word'];
-                $flashcard->meaning = $flashcardData['meaning'];
-                $flashcard->pronunciation = $flashcardData['pronunciation'];
-                $flashcard->nextReviewDate = Carbon::now();
-                $flashcard->save();
+            $json = File::get($filePath);
+            $flashcards = json_decode($json, true);
+
+            $flashcard = new Flashcard();
+
+            if (!Schema::hasTable($fileName)) {
+                throw new \Exception('Table does not exist: ' . $fileName);
+            }
+            $flashcard->setTable($fileName);
+
+            foreach ($flashcards as $flashcardData) {
+                $exists = $flashcard->where('user_id', Auth::id())
+                                    ->where('word', $flashcardData['word'])
+                                    ->where('meaning', $flashcardData['meaning'])
+                                    ->exists();
+    
+                if (!$exists) {
+                    // Create a new instance of the Flashcard model for saving
+                    $newFlashcard = $flashcard->newInstance();
+                    $newFlashcard->user_id = Auth::id();
+                    $newFlashcard->word = $flashcardData['word'];
+                    $newFlashcard->meaning = $flashcardData['meaning'];
+                    $newFlashcard->pronunciation = $flashcardData['pronunciation'];
+                    $newFlashcard->nextReviewDate = Carbon::now();
+                    $newFlashcard->save();
+                }
             }
         }
-
         return redirect('/');
+        //it throws an error but still seeds, soo dunno
     }
+
+
+    
+
 }
