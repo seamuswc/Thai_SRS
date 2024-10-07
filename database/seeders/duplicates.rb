@@ -27,7 +27,7 @@ def find_duplicates(array)
 end
 
 # Read and parse the JSON file
-file = File.read('seeds/chinese.json')
+file = File.read('seeds/thai.json')
 data = JSON.parse(file)
 
 # Find duplicates

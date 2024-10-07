@@ -74,35 +74,49 @@ class FlashcardController extends Controller
 
         foreach($files as $file) {
 
-            $fileName = pathinfo($file, PATHINFO_FILENAME);
-            $filePath = $file->getRealPath();
-            
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'json') {
 
-            $json = File::get($filePath);
-            $flashcards = json_decode($json, true);
+                $fileName = pathinfo($file, PATHINFO_FILENAME);
+                $filePath = $file->getRealPath();
+                
 
-            $flashcard = new Flashcard();
+                $json = File::get($filePath);
+                $flashcards = json_decode($json, true);
 
-            if (!Schema::hasTable($fileName)) {
-                throw new \Exception('Table does not exist: ' . $fileName);
-            }
-            $flashcard->setTable($fileName);
+                $flashcard = new Flashcard();
 
-            foreach ($flashcards as $flashcardData) {
-                $exists = $flashcard->where('user_id', Auth::id())
-                                    ->where('word', $flashcardData['word'])
-                                    ->where('meaning', $flashcardData['meaning'])
-                                    ->exists();
-    
-                if (!$exists) {
-                    // Create a new instance of the Flashcard model for saving
-                    $newFlashcard = $flashcard->newInstance();
-                    $newFlashcard->user_id = Auth::id();
-                    $newFlashcard->word = $flashcardData['word'];
-                    $newFlashcard->meaning = $flashcardData['meaning'];
-                    $newFlashcard->pronunciation = $flashcardData['pronunciation'];
-                    $newFlashcard->nextReviewDate = Carbon::now();
-                    $newFlashcard->save();
+                if (!Schema::hasTable($fileName)) {
+                    throw new \Exception('Table does not exist: ' . $fileName);
+                }
+                $flashcard->setTable($fileName);
+
+                foreach ($flashcards as $flashcardData) {
+
+
+                    //suprisingly necessary, chatgpt on word creation often mispells meaning...for a randmon json line
+                    $word = $flashcardData['word'] ?? null;
+                    $meaning = $flashcardData['meaning'] ?? null;
+                    $pronunciation = $flashcardData['pronunciation'] ?? null;
+                    if (!$word || !$meaning) {
+                        // Skip if essential data is missing
+                        continue;
+                    }
+
+                    $exists = $flashcard->where('user_id', Auth::id())
+                                        ->where('word', $flashcardData['word'])
+                                        ->where('meaning', $flashcardData['meaning'])
+                                        ->exists();
+        
+                    if (!$exists) {
+                        // Create a new instance of the Flashcard model for saving
+                        $newFlashcard = $flashcard->newInstance();
+                        $newFlashcard->user_id = Auth::id();
+                        $newFlashcard->word = $flashcardData['word'];
+                        $newFlashcard->meaning = $flashcardData['meaning'];
+                        $newFlashcard->pronunciation = $flashcardData['pronunciation'];
+                        $newFlashcard->nextReviewDate = Carbon::now();
+                        $newFlashcard->save();
+                    }
                 }
             }
         }
